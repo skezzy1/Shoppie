@@ -1,0 +1,33 @@
+{% load static %}
+<script src="{% static 'js/form.js' %}"></script>
+<script src="{% static 'js/script.js'%}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="{% static 'js/modal.js' %}"></script>
+<script src="{% static 'js/dropDownMenu.js' %}"></script>
+<script src="{% static 'js/filter.js' %}"></script>
+<script src="{% static 'js/admin_dynamic_sizes.js' %}"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script>
+    var quill = new Quill('#id_content', {
+      theme: 'snow',
+      placeholder: 'Write your content here...',
+      modules: {
+        toolbar: [
+          [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          ['bold', 'italic', 'underline'],
+          ['link'],
+          [{ 'align': [] }],
+          ['image']
+        ]
+      }
+    });
+
+    // Initialize the editor with the existing content
+    quill.root.innerHTML = "{{ post.content|escapejs }}";
+
+    function updateContentInput() {
+      document.getElementById('content_input').value = quill.root.innerHTML;
+    }
+  </script>

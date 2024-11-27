@@ -1,0 +1,48 @@
+{% load static %}
+{% include 'forms/contactUsForm.html' %}
+<!-- #HEADER-->
+<header class="header" data-header>
+    <div class="container">
+        <a href="{% url 'home' %}" class="logo">
+            <img src="{% static 'img/logo.svg' %}" width="132" height="27" alt="shoppie home">
+        </a>
+        
+        <nav class="navbar" data-navbar>
+            <ul class="navbar-list">
+                <li><a href="{% url 'home' %}" class="navbar-link">Home</a></li>
+                <li><a href="{% url 'aboutUs' %}" class="navbar-link">About Us</a></li>
+                <li><a href="{% url 'blog' %}" class="navbar-link">Blog</a></li>
+                <li><a href="{% url 'shop' %}" class="navbar-link">Shop</a></li>
+                <li><a href="#" class="navbar-link" id="contactUsBtn">Contact Us</a></li>
+            </ul>
+
+            <button class="cart-btn">
+                <ion-icon name="bag" aria-hidden="true"></ion-icon>
+                <span class="span"><a href="{% url 'cart' %}">Cart</a></span>
+            </button>
+
+            {% if user.is_authenticated %}
+            <div class="user-profile" id="userProfileMenu">
+                {% if user.userprofile.avatar %}
+                    <img src="{{ user.userprofile.avatar.url }}" alt="{{ user.username }}" class="user-avatar" id="avatar">
+                {% else %}
+                    <img src="{% static 'img/default-avatar.png' %}" alt="default avatar" class="user-avatar" id="avatar">
+                {% endif %}
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="{% url 'profile' %}" class="dropdown-item">Profile</a>
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="dropdown-item">Logout</button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary" id="loginBtn">Login</a>
+        {% endif %}
+        </nav>
+
+        <button class="nav-open-btn" aria-label="toggle menu" data-nav-toggler>
+            <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+        </button>
+    </div>
+</header>

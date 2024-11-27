@@ -1,0 +1,19 @@
+{% load static %}
+<div id="overlayContactForm" class="overlay" style="display: none;">
+    <div class="contact-form__container">
+        <form method="POST" action="{% url 'send_contact_view' %}" class="contact-form">
+          {% csrf_token %}
+          <button type="button" class="form__cancel" onclick="closeContactForm()">
+              <div class="form__contact__closeBottom">&#10006;</div>
+          </button>
+            <h3 class="form__title">Contact Us</h3>
+            <label for="Email" class="form__label"><b>Email</b></label>
+            <input name="email" id="Email" type="email" placeholder="Email" required class="form__input">
+            <label for="Name" class="form__label"><b>Your Name</b></label>
+            <input name="name" id="Name" type="text" placeholder="Name" required class="form__input">
+            <label for="Message" class="form__label"><b>Message</b></label>
+            <textarea id="Message" name="content" placeholder="Write your message here" class="form__contact__text-input" rows="4"></textarea>
+            <button type="submit" class="form__btn">Send</button>
+      </form>
+    </div>
+</div>

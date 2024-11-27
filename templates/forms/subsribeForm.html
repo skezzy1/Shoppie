@@ -1,0 +1,8 @@
+<div class="footer-list">
+    <p class="footer-list-title title">Subscribe newsletter</p>
+    <form method="POST" action="{% url 'subscribe_newsletter' %}" class="subscribe-form">
+      {% csrf_token %}
+      <input type="email" name="email" placeholder="Enter your email address" required autocomplete="off" class="input-field">
+      <button type="submit" class="btn btn-secondary">Subscribe</button>
+  </form>
+  </div>
