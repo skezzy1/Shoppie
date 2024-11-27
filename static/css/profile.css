@@ -1,0 +1,13 @@
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+h3 {
+    margin: 0 0 10px;
+    color: #007bff;
+}
+tr {
+    padding: 10px;
+    margin-top:15px;
+}

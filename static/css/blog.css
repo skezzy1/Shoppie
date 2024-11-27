@@ -1,0 +1,273 @@
+.blog-section {
+  padding: 50px 0;
+  text-align: center;
+  max-width: 1200px; 
+  margin: 0 auto;    
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Чітко 3 колонки */
+  gap: 30px; /* Проміжок між постами */
+  padding: 0 40px;
+  margin-left: 30px;
+}
+
+.blog-post {
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.blog-post-content {
+  width: 100%; 
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.blog-post-content:hover {
+  transform: scale(1.05);
+}
+
+.blog-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.blog-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.blog-title a:hover {
+  color: #333;
+}
+
+.image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border-radius: 15px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.blog-description {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.read-more-container {
+  text-align: center;
+}
+
+.read-more-btn {
+  font-size: 1rem;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .blog-section {
+    padding: 20px; 
+    margin: 0;
+  }
+
+  .section-title {
+    font-size: 2rem; 
+    margin-bottom: 20px;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr; /* Одна колонка на малих екранах */
+    gap: 20px; 
+  }
+
+  .blog-post {
+    width: 100%;
+    max-width: 800px; 
+    margin-bottom: 30px;
+    box-sizing: border-box;
+  }
+
+  .blog-post-content {
+    width: 100%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+
+  .image-container {
+    width: 100%;
+    height: 250px; 
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 10px;
+  }
+
+  .blog-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .blog-description {
+    font-size: 1.2rem; 
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .read-more-btn {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+}
+
+/*Blog details*/
+.blog-detail {
+  padding: 50px;
+  background-color: #f9f9f9;
+  color: #333;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.white-background {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.blog-image-container {
+  width: 80%; 
+  max-width: 800px;  
+  height: 300px; 
+  overflow: hidden;
+  margin: 40px auto 30px;  
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.blog-image-container img {
+  width: 100%;
+  height: auto; 
+  object-fit: cover; 
+  border-radius: 8px; 
+}
+
+.blog-text-container {
+  padding: 20px;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.blog-content {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #666;
+  text-align: justify;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .blog-content {
+    font-size: 1rem;
+  }
+
+  .blog-image-container {
+    height: 200px;  
+    width: 100%;  
+    max-width: none;  
+  }
+}
+    /* Стилізація кнопок */
+    .admin-buttons {
+      margin-top: 20px;
+      justify-content: center;
+      margin-left: 45%;
+   }
+
+    .admin-buttons .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    /* Кнопка редагування */
+    .admin-buttons .btn-warning {
+      background-color: #ffc107;
+      color: #fff;
+    }
+
+    .admin-buttons .btn-warning:hover {
+      background-color: #e0a800;
+      transform: scale(1.05);
+    }
+
+    /* Кнопка видалення */
+    .admin-buttons .btn-danger {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .admin-buttons .btn-danger:hover {
+      background-color: #c82333;
+      transform: scale(1.05);
+    }
+
+    .admin-buttons .btn:focus {
+      outline: none;
+    }
