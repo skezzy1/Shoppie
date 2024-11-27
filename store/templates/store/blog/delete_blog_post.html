@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>Delete Blog Post</title>
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+</head>
+<body>
+    <!-- #HEADER -->
+    {% include 'header.html' %}
+    {% if user.is_staff %}
+    <main style="margin-top: 95px; margin-bottom: 50px;">
+        <section class="blog-form-section">
+            <div class="container">
+                <h1 class="section-title">Delete Blog Post</h1>
+                <p>Are you sure you want to delete the blog post titled "<strong>{{ post.title }}</strong>"?</p>
+                <form method="POST" class="blog-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Yes, delete</button>
+                    <a href="{% url 'blog_detail' post.id %}" class="btn btn-secondary">No, go back</a>
+                </form>
+            </div>
+        </section>
+    </main>
+    {% endif %}
+    <!-- #FOOTER -->
+    {% include 'footer.html' %}
+</body>
+</html>

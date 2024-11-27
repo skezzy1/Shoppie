@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'head.html' %}
+  <title>Shoppie - Blog</title>
+  <meta name="title" content="Shoppie - Blog">
+  <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  <!--  #HEADER-->
+  {% include 'header.html' %}
+  <main style="margin-top: 150px;">
+    <section class="blog-section">
+      <h2 class="section-title title text-center">Latest Blog</h2>
+      <div class="blog-grid" style="gap:50px;">
+        {% for post in posts %}
+        <div class="blog-post">
+          <div class="blog-post-content">
+            <h2 class="blog-title">
+              <a href="{% url 'blog_detail' post.id %}">{{ post.title }}</a>
+            </h2>
+            {% if post.image %}
+            <div class="image-container">
+              <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            </div>
+            {% endif %}
+            <p class="blog-description">{{ post.short_description }}</p>
+            <div class="read-more-container">
+              <a href="{% url 'blog_detail' post.id %}" class="btn btn-primary read-more-btn">Read More</a>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <p>No blog posts available.</p>
+        {% endfor %}
+      </div>      
+    </section>
+  </main>
+  <!--  #FOOTER-->
+  {% include 'footer.html' %}
+</body>
+</html>

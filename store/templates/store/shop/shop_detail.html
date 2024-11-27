@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>Product {{ product.title }}</title>
+    <link href="{% static 'css/shop.css' %}" rel="stylesheet">
+</head>
+<body>
+    {% include 'header.html' %}
+    <main style="margin-top: 150px; margin-bottom: 55px;">
+        <div class="product-detail">
+            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="product-image">
+            <div class="product-info">
+                <h1 class="product-title">{{ product.title }}</h1>
+                <p class="product-price">Price: ${{ product.price }}</p>
+                <p class="product-description"><strong>Description:</strong> {{ product.short_description }}</p>
+                <p class="product-category"><strong>Category:</strong> {{ product.get_product_category_display }}</p>
+                {% if product.sizes %}
+                    <div class="size-selection">
+                        <form method="POST" action="{% url 'add_to_cart' product.id %}" id="add-to-cart-form">
+                            {% csrf_token %}
+                            <label for="size"><strong>Choose Size:</strong></label>
+                            <div class="size-buttons">
+                                {% for size in product.sizes %}
+                                    <button type="button" class="size-button" onclick="selectSize('{{ size }}')">{{ size }}</button>
+                                {% endfor %}
+                            </div>
+                            <input type="hidden" id="selected-size" name="size" value="">
+                            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <form method="post" action="{% url 'add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <script src="{% static 'js/shop.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            // Обробник події для додавання товару до кошика
+            $('#add-to-cart-form').submit(function(event) {
+                event.preventDefault();  // Забороняємо стандартне відправлення форми
+        
+                var formData = $(this).serialize();  // Отримуємо дані форми
+        
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Показуємо повідомлення про успішне додавання
+                        $('#cart-message').show();
+        
+                        // Сховаємо повідомлення через кілька секунд
+                        setTimeout(function() {
+                            $('#cart-message').hide();
+                        }, 3000); // Сховуємо через 3 секунди
+        
+                        // Оновлюємо кошик або інші дії, якщо потрібно
+                    },
+                    error: function(xhr, errmsg, err) {
+                        // Виводимо повідомлення про помилку, якщо є
+                        alert('Something went wrong, please try again.');
+                    }
+                });
+            });
+        });
+        </script>
+    {% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% load static %}
+<div class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="h1 hero-title title">Man summer <br> collection</h1>
+        <p class="hero-text">
+          This is the factor that sets us apart from competition and allows us deliver a specialist business service
+          team applies its ranging experience determining
+        </p>
+        <a href="{% url 'shop' %}" class="btn btn-primary">
+          <span class="span">Shop Now</span>
+          <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+        </a>
+      </div>
+      <div class="hero-banner">
+        <figure class="img-holder" style="--width: 704; --height: 700;">
+          <img src="{% static 'img/hero-banner.png' %}" width="704" height="700" alt="hero banner" class="img-cover">
+        </figure>
+        <img src="{% static 'img/hero-shape-1.png' %}" width="255" height="249" alt="shape" class="shape shape-1">
+      </div>
+      <img src="{% static '/img/hero-shape-2.png' %}" width="360" height="133" alt="shape" class="shape shape-2">
+    </div>
+  </div>

@@ -1,0 +1,44 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'head.html' %}
+  <title>Create New Product</title>
+  <meta name="title" content="Create New Blog Post">
+  <link href="{% static 'css/order_history.css' %}" rel="stylesheet">
+</head>
+{% block content %}
+<body>
+    {% include 'header.html' %}
+    <main style="margin-top: 150px; margin-bottom: 50px;">
+        <h1>My Order History</h1>
+    
+        <div class="order-history-container">
+            <table class="order-history-table">
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Date</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.created_at|date:"F j, Y, H:i" }}</td>
+                        <td>${{ order.total_price }}</td>
+                        <td class="status {{ order.status|lower }}">{{ order.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endblock %}
+    </main>
+</body>
+{% include 'footer.html' %}

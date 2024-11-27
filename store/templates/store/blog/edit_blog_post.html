@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'head.html' %}
+  <title>Edit Blog Post</title>
+  <meta name="title" content="Edit Blog Post">
+  <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+  <link href="{% static 'css/admins.css' %}" rel="stylesheet">
+</head>
+<body>
+    <!-- #HEADER -->
+    {% include 'header.html' %}
+    {% if user.is_staff %}
+    <main style="margin-top: 95px;">
+      <section class="create-blog white-background">
+        <div class="container">
+          <h1 class="section-title">Edit Blog Post</h1>
+  
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Title -->
+            <div class="form-group">
+                <label for="id_title">Title</label>
+                {{ form.title }}
+            </div>
+          
+            <!-- Short Description -->
+            <div class="form-group">
+                <label for="id_short_description">Short Description</label>
+                {{ form.short_description }}
+            </div>
+          
+            <!-- Content with Quill Editor -->
+            <div class="form-group quill-container">
+                <label for="id_content">Content</label>
+                <div id="id_content" class="quill-editor">{{ post.content|safe }}</div>
+                <input type="hidden" name="content" id="content_input">
+            </div>
+          
+            <!-- Image Upload -->
+            <div class="form-group">
+                <label for="id_image">Image</label>
+                {{ form.image }}
+            </div>
+          
+            <!-- Edit Menu -->
+            <div class="form-group edit-menu">
+                <button type="submit" class="submit-btn" onclick="updateContentInput()">Save Changes</button>
+                <a href="{% url 'blog_detail' post.id %}" class="form__cancel" style="margin-top:15px; margin-bottom: 15px;">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    {% endif %}
+    <!-- #FOOTER -->
+    {% include 'footer.html' %}
+</body>
+</html>

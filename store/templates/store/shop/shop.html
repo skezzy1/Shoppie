@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'head.html' %}
+    <link href="{% static 'css/shop.css' %}" rel="stylesheet">
+    <title>Shop</title>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <main style="margin-top: 150px; margin-bottom: 15px;">
+        <section class="shop" aria-label="shop">
+            <h2 style="text-align: center;">Our Products</h2>
+            
+            <!-- Filter Section (Search Bar and Sorting) -->
+            <div class="filter-section">
+                <div class="search-bar">
+                    <input type="text" id="search" placeholder="Search products..." oninput="filterProducts()">
+                    <button type="button" onclick="filterProducts()">Search</button>
+                </div>
+                <div class="sort-section">
+                    <label for="sort">Sort by:</label>
+                    <select id="sort" onchange="sortProducts()">
+                        <option value="name">Name</option>
+                        <option value="price_asc">Price: Low to High</option>
+                        <option value="price_desc">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+            <div class="shop-grid" id="product-grid">
+                {% for product in products %}
+                <div class="product-card" data-price="{{ product.price }}">
+                    <a href="{% url 'shop_detail' product.id %}" class="product-link">
+                        <img src="{{ product.image.url }}" alt="{{ product.title }}" class="product-image">
+                        <h3 class="product-title">{{ product.title }}</h3>
+                        <div class="product-price">{{ product.price }} $</div>
+                        <p class="product-description">{{ product.description }}</p>
+                    </a>
+                    <div class="button-container">
+                        <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                        </form>
+                        <a href="{% url 'shop_detail' product.id %}" class="view-details-btn">Details</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+    {% include 'footer.html' %}
+    <script src="{% static 'js/shop.js' %}"></script>
+</body>
+
+</html>

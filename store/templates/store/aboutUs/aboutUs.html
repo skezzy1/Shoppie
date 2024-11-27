@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'head.html' %}
+  <title>Shoppie - About Us</title>
+  <meta name="title" content="Shoppie - AboutUs">
+  <link href="{% static 'css/aboutUs.css' %}" rel="stylesheet">
+</head>
+<body>
+  <!-- #HEADER-->
+  {% include 'header.html' %}
+  <main>
+    <section class="about" aria-label="about us" style="margin-top: 125px;">
+      <div class="container">
+        <h2 class="h2 section-title title text-center">About Us</h2>
+        <p class="about-description">
+          Welcome to <strong>Shoppie</strong> — your one-stop online shop for fashionable clothing and accessories. We strive to provide our customers with the best selection of trendy apparel, from casual wear to elegant evening outfits. Our team carefully curates each product to ensure you find items that fit your style and needs.
+        </p>
+        <p class="about-description">
+          Our collection includes everything you need to create your unique style. We work with trusted suppliers to ensure the quality of every item.
+        </p><br>
+        <h3 class="h3 section-subtitle text-center">Why Choose Us?</h3><br>
+        <ul class="about-list">
+          <li><b>Wide Selection:</b> A large variety of clothing for men, women, and children.</li>
+          <li><b>Affordable Prices:</b> Competitive pricing without compromising quality.</li>
+          <li><b>Fast Delivery: Our </b>team ensures quick delivery so you can enjoy your purchases sooner.</li>
+          <li><b>Excellent Service:</b> Our support team is always ready to assist you with any inquiries or requests.</li>
+        </ul>
+      </div><br><br><br>
+    </section>
+
+    <!-- Карта -->
+    <section class="map" aria-label="our location">
+        <div class="container">
+          <h2 class="h2 section-title title text-center">Our Location</h2>
+          <p class="map-description text-center">
+            Visit us at <strong>Neal St, London WC2H 9PR, United Kingdom</strong>! Use the map below to find the easiest route to our store.
+          </p>
+          <br>
+          <div class="map-wrapper">
+            <div class="map-container">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345091335!2d-0.1305923153168!3d51.512208179877845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761ca63d6b7e3f%3A0xf00003c5b1d4e7f8!2sNeal%20St%2C%20London%20WC2H%209PR%2C%20United%20Kingdom!5e0!3m2!1sen!2sus!4v1631820168478!5m2!1sen!2sus"
+                width="600"
+                height="450"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"></iframe>
+            </div>
+            <div class="working-hours">
+              <h3 class="h3 section-subtitle">Working Hours</h3>
+              <p>Monday to Friday: 9:00 AM - 6:00 PM</p>
+              <p>Saturday: 10:00 AM - 4:00 PM</p>
+              <p>Sunday: Closed</p>
+            </div>
+          </div>
+        </div>
+      </section>
+  </main>
+  <br><br><br><br><br>
+  <!--  #FOOTER-->
+  {% include 'footer.html' %}
+</body>
+</html>

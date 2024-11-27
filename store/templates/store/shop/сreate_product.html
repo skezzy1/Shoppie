@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'head.html' %}
+  <title>Create New Product</title>
+  <meta name="title" content="Create New Blog Post">
+  <link href="{% static 'css/admins.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- #HEADER -->
+    {% include 'header.html' %}
+    <main style="margin-top: 95px;">
+      <section class="create-blog white-background">
+        {% if user.is_staff %}
+        <div class="container">
+          <h1 class="section-title">Create New Product</h1>
+  
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_title">Product Name</label>
+                {{ form.title }}
+            </div>
+  
+            <div class="form-group">
+                <label for="id_short_description">Short Description</label>
+                {{ form.short_description }}
+            </div>
+            
+            <div class="form-group quill-container">
+                <label for="id_content">Content</label>
+                <div id="editor-container" class="quill-editor"></div>
+                <input type="hidden" name="content" id="content_input">
+            </div>
+            
+            <div class="form-group">
+              <label for="id_price">Price</label>
+              {{ form.price }}
+            </div>
+            
+            <div class="form-group">
+              <label for="id_product_category">Category</label>
+              {{ form.product_category }}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_image">Image</label>
+                {{ form.image }}
+            </div>
+          
+            <div class="form-group edit-menu">
+                <button type="submit" class="submit-btn" onclick="updateContentInput()">Save Product</button>
+            </div>
+          </form>
+        </div>
+        {% endif %}
+      </section>
+    </main>
+  
+    {% include 'footer.html' %}
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+      var quill = new Quill('#editor-container', {
+        theme: 'snow',
+        placeholder: 'Write your content here...',
+        modules: {
+          toolbar: [
+            [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['bold', 'italic', 'underline'],
+            ['link'],
+            [{ 'align': [] }],
+            ['image']
+          ]
+        }
+      });
+      
+      function updateContentInput() {
+        document.getElementById('content_input').value = quill.root.innerHTML;
+      }
+    </script>
+</body>
+</html>

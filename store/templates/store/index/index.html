@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'head.html' %}
+  <title>Shoppie - Man summer collection</title>
+  <meta name="title" content="Shoppie - Man summer collection">
+</head>
+
+<body>
+  {% include "header.html" %}
+  <main>
+    <article>
+      <!-- - #HERO-->
+      {% include 'store/index/hero.html' %}
+      <!-- #PRODUCT-->
+      {% include 'store/index/product.html' %}
+      <!-- - #FEATURE-->
+       {% include 'store/index/feature.html' %}
+      <!-- - #OFFER -->
+       {% include 'store/index/offer.html' %}
+    </article>
+  </main>
+  <!--  #FOOTER-->
+  {% include 'footer.html' %}
+</body>
+</html>

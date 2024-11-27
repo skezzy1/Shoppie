@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'head.html' %}
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <main style="margin-top: 150px; margin-bottom: 55px;">
+        <section class="cart-container">
+                {% if cart %}
+                    <div class="cart-items">
+                        {% for item in cart %}
+                            <div class="cart-item" data-product-id="{{ item.id }}">
+                                <img src="{{ item.image_url }}" alt="{{ item.name }}">
+            
+                                <div class="cart-item-details">
+                                    <div class="cart-item-details">
+                                    <h3><strong>{{ item.name }}</strong></h3>
+                                    <p><strong>Price:</strong>  ${{ item.price }}</p>
+                                    <!-- Виведення вибраного розміру -->
+                                    {% if item.size %}
+                                        <p><strong>Size:</strong> {{ item.size }}</p>
+                                    {% endif %}
+                                    
+                                    <div class="quantity-controls" style="display: flex; align-items: center; gap: 10px;">
+                                        <p><strong>Quantity:</strong></p>
+                                        <form action="{% url 'decrease_quantity' item.id %}" method="post" style="display: inline;">
+                                            {% csrf_token %}
+                                            <button type="submit">-</button>
+                                        </form>
+                        
+                                        <span style="font-size: 1.5rem; font-weight: bold;">{{ item.quantity }}</span>
+                                        <form action="{% url 'increase_quantity' item.id %}" method="post" style="display: inline;">
+                                            {% csrf_token %}
+                                            <button type="submit">+</button>
+                                        </form>
+                                    </div>   
+                                </div>                               
+                                </div>
+            
+                                <form action="{% url 'delete_from_cart' item.id %}" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary btn-lg">Remove</button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                    </div>
+            
+                    <div class="cart-summary" style="margin-top: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 5px; background-color: #f9f9f9;">
+                        <h4 style="margin-bottom: 20px;">Order Summary</h4>
+                        <p style="font-size: 1.2rem;">
+                            <strong>Total: </strong> ${{ total_price|floatformat:2 }}
+                        </p>
+                        <form action="{% url 'checkout' %}" method="post" style="margin-top: 15px;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Proceed to Checkout</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <p style="text-align: center;">Your cart is empty.</p>
+                {% endif %}          
+        </section>
+    </main>
+    <script src="{% static 'js/shop.js' %}"></script>
+    {% include 'footer.html' %}
+</body>
+</html>

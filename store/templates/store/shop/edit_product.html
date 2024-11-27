@@ -1,0 +1,100 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include 'head.html' %}
+  <title>Edit Product {{ product.title }}</title>
+  <meta name="title" content="Edit Product">
+  <link href="{% static 'css/shop.css' %}" rel="stylesheet">
+  <link href="{% static 'css/admins.css' %}" rel="stylesheet">
+</head>
+<body>
+    {% include 'header.html' %}
+    
+    {% if user.is_staff %}
+    <main style="margin-top: 95px;">
+      <section class="edit-product white-background">
+        <div class="container">
+          <h1 class="section-title">Edit Product</h1>
+
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Назва продукту -->
+            <div class="form-group">
+                <label for="id_name">Product Name</label>
+                {{ form.title }}
+            </div>
+
+            <!-- Короткий опис продукту -->
+            <div class="form-group">
+                <label for="id_short_description">Short Description</label>
+                {{ form.short_description }}
+            </div>
+
+            <!-- Контент з Quill Editor -->
+            <div class="form-group quill-container">
+                <label for="id_description">Description</label>
+                <div id="id_description" class="quill-editor">{{ product.description|safe }}</div>
+                <input type="hidden" name="description" id="description_input">
+            </div>
+
+            <!-- Завантаження зображення -->
+            <div class="form-group">
+                <label for="id_image">Product Image</label>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="Product Image" style="max-width: 200px;"/>
+                {% endif %}
+                {{ form.image }}
+            </div>
+
+            <!-- Ціна продукту -->
+            <div class="form-group">
+                <label for="id_price">Price</label>
+                {{ form.price }}
+            </div>
+
+            <!-- Розділ для кнопок -->
+            <div class="form-group edit-menu">
+                <button type="submit" class="submit-btn">Save Changes</button>
+                <a href="{% url 'shop_detail' product.id %}" class="form__cancel" style="margin-top:15px; margin-bottom: 15px;">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    {% endif %}
+
+    {% include 'footer.html' %}
+
+    <!-- Скрипт для оновлення Quill Editor перед відправкою -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            updateDescriptionInput();
+        });
+
+        function updateDescriptionInput() {
+            const editorContent = document.querySelector('.quill-editor').innerHTML;
+            document.getElementById('description_input').value = editorContent;
+        }
+    </script>
+
+    <!-- Quill Editor і стилі -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const quill = new Quill('.quill-editor', {
+                theme: 'snow'
+            });
+
+            // Заповнення редактора поточним описом
+            const description = document.getElementById('id_description');
+            if (description) {
+                quill.root.innerHTML = description.innerHTML;
+            }
+        });
+    </script>
+</body>
+</html>
