@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include 'head.html' %}
+  <title>Profile</title>
+  <meta name="title" content="Shoppie - Man summer collection">
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+{% include 'header.html' %}
+<main style="margin-top: 150px;">
+{% block content %}
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                {% if user.userprofile.avatar %}
+                    <img src="{{ user.userprofile.avatar.url }}" alt="{{ user.username }}" class="user-avatar">
+                {% else %}
+                    <img src="{% static 'img/default-avatar.png' %}" alt="default avatar" class="user-avatar">
+                {% endif %}
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-username">{{ user.username }}</h1>
+                <p class="profile-email">{{ user.email }}</p>
+            </div>
+        </div>
+        
+        <div class="profile-actions">
+            <a href="{% url 'edit_profile' %}" class="btn btn-edit-profile">Edit Profile</a>
+            <form method="POST" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-logout">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="profile-container">
+        <h2 style="text-align: center;">Your Order History</h2>
+        <a href="{% url 'order_history' %}" style="text-align: center;">View all orders</a>
+    </div>
+    {% if user.is_staff %}
+    <div class="profile-container table-container">
+        <h2 style="text-align: center;"> Admin Panel</h2>
+        <!-- Admin Blog Section -->
+        <h3 style="text-align: center;">Admin Blog</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th><h2 style="text-align: center;">Action</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a href="{% url 'create_blog_post' %}">Blog creation</a></td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;"><a href="{% url 'blog' %}">View all blog posts</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        
+        <!-- Admin Products Section -->
+        <h3 style="text-align: center;">Admin Products</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th><h2>Action</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: center;"><a href="{% url 'create_shop_product' %}">Shop creation</a></td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'shop' %}">View all product list</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+{% endblock %}
+</main>
+{% include 'footer.html' %}
